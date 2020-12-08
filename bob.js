@@ -1,19 +1,28 @@
 class Bob {
-    constructor(x,y, radius){
+    constructor(x,y,color){
         var bob_options ={
-            friction : 0.5,
-            density:2,
-            restituition:1
-
+            restitution:1,
+            friction:0,
+            frictionAir:0,
+            slop:1,
+            inertia:Infinity
         }
-        this.body = Matter.Bodies.circle(x,y,this.radius/2, bob_options);
-        this.radius = radius;
+        this.body = Bodies.rectangle(x,y,40,40,bob_options);
+        this.x = x;
+        this.y = y;
+        this.color = color;
         World.add(world, this.body);
     }
     display(){
         var position = this.body.position;
-        fill("royalblue");
+        var angle = this.body.angle;
+        push();
+        translate(position.x, position.y);
+        rotate(angle);
+        noStroke();
+        fill(this.color);
         ellipseMode(CENTER);
-        ellipse(position.x,position.y,this.radius,this.radius);
+        ellipse(0,0,60,60);
+        pop();
     }
 }
